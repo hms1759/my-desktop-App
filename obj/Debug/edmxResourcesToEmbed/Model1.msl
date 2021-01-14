@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="myschoolModelStoreContainer" CdmEntityContainer="myschoolEntities3">
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="myschoolModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="ld" ColumnName="ld" />
+          <ScalarProperty Name="adminName" ColumnName="adminName" />
+          <ScalarProperty Name="adminUser" ColumnName="adminUser" />
+          <ScalarProperty Name="adminPass" ColumnName="adminPass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="departments">
+      <EntityTypeMapping TypeName="myschoolModel.department">
+        <MappingFragment StoreEntitySet="department">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="departmentName" ColumnName="departmentName" />
+          <ScalarProperty Name="facultyID" ColumnName="facultyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="faculties">
+      <EntityTypeMapping TypeName="myschoolModel.faculty">
+        <MappingFragment StoreEntitySet="faculty">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grades">
+      <EntityTypeMapping TypeName="myschoolModel.grade">
+        <MappingFragment StoreEntitySet="grade">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="grade1" ColumnName="grade" />
+          <ScalarProperty Name="point" ColumnName="point" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocalGovernments">
+      <EntityTypeMapping TypeName="myschoolModel.LocalGovernment">
+        <MappingFragment StoreEntitySet="LocalGovernment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="localGov" ColumnName="localGov" />
+          <ScalarProperty Name="stateID" ColumnName="stateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="states">
+      <EntityTypeMapping TypeName="myschoolModel.state">
+        <MappingFragment StoreEntitySet="state">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="stateName" ColumnName="stateName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subjects">
+      <EntityTypeMapping TypeName="myschoolModel.subject">
+        <MappingFragment StoreEntitySet="subject">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="subjectName" ColumnName="subjectName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="examsittings">
+      <EntityTypeMapping TypeName="myschoolModel.examsitting">
+        <MappingFragment StoreEntitySet="examsittings">
+          <ScalarProperty Name="numberofsittings" ColumnName="numberofsittings" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="nameofexams">
+      <EntityTypeMapping TypeName="myschoolModel.nameofexam">
+        <MappingFragment StoreEntitySet="nameofexam">
+          <ScalarProperty Name="examName" ColumnName="examName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fulldetails">
+      <EntityTypeMapping TypeName="myschoolModel.fulldetail">
+        <MappingFragment StoreEntitySet="fulldetail">
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="passWord" ColumnName="passWord" />
+          <ScalarProperty Name="department" ColumnName="department" />
+          <ScalarProperty Name="faculty" ColumnName="faculty" />
+          <ScalarProperty Name="jambsub4" ColumnName="jambsub4" />
+          <ScalarProperty Name="jambsub3" ColumnName="jambsub3" />
+          <ScalarProperty Name="jambsub2" ColumnName="jambsub2" />
+          <ScalarProperty Name="jambsub1" ColumnName="jambsub1" />
+          <ScalarProperty Name="jambScore" ColumnName="jambScore" />
+          <ScalarProperty Name="sub25" ColumnName="sub25" />
+          <ScalarProperty Name="sub24" ColumnName="sub24" />
+          <ScalarProperty Name="sub23" ColumnName="sub23" />
+          <ScalarProperty Name="sub22" ColumnName="sub22" />
+          <ScalarProperty Name="sub21" ColumnName="sub21" />
+          <ScalarProperty Name="exam2Name" ColumnName="exam2Name" />
+          <ScalarProperty Name="sub15" ColumnName="sub15" />
+          <ScalarProperty Name="sub14" ColumnName="sub14" />
+          <ScalarProperty Name="sub13" ColumnName="sub13" />
+          <ScalarProperty Name="sub12" ColumnName="sub12" />
+          <ScalarProperty Name="sub1" ColumnName="sub1" />
+          <ScalarProperty Name="exam1Name" ColumnName="exam1Name" />
+          <ScalarProperty Name="examSitting" ColumnName="examSitting" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="dateofBirth" ColumnName="dateofBirth" />
+          <ScalarProperty Name="localGov" ColumnName="localGov" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="nationality" ColumnName="nationality" />
+          <ScalarProperty Name="middleName" ColumnName="middleName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

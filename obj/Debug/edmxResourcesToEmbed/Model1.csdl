@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="myschoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="ld" />
+    </Key>
+    <Property Name="ld" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="adminUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="adminPass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="departmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="facultyID" Type="Int32" />
+    <NavigationProperty Name="faculty" Relationship="Self.FK_department_faculty" FromRole="department" ToRole="faculty" />
+  </EntityType>
+  <EntityType Name="faculty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="facultyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="departments" Relationship="Self.FK_department_faculty" FromRole="faculty" ToRole="department" />
+  </EntityType>
+  <EntityType Name="grade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="grade1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="point" Type="Int32" />
+  </EntityType>
+  <EntityType Name="LocalGovernment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="localGov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="stateID" Type="Int32" />
+    <NavigationProperty Name="state" Relationship="Self.FK_LocalGovernment_state" FromRole="LocalGovernment" ToRole="state" />
+  </EntityType>
+  <EntityType Name="state">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LocalGovernments" Relationship="Self.FK_LocalGovernment_state" FromRole="state" ToRole="LocalGovernment" />
+  </EntityType>
+  <EntityType Name="subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_department_faculty">
+    <End Role="faculty" Type="Self.faculty" Multiplicity="0..1" />
+    <End Role="department" Type="Self.department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="faculty">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="department">
+        <PropertyRef Name="facultyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LocalGovernment_state">
+    <End Role="state" Type="Self.state" Multiplicity="0..1" />
+    <End Role="LocalGovernment" Type="Self.LocalGovernment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="state">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LocalGovernment">
+        <PropertyRef Name="stateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="myschoolEntities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="departments" EntityType="Self.department" />
+    <EntitySet Name="faculties" EntityType="Self.faculty" />
+    <EntitySet Name="grades" EntityType="Self.grade" />
+    <EntitySet Name="LocalGovernments" EntityType="Self.LocalGovernment" />
+    <EntitySet Name="states" EntityType="Self.state" />
+    <EntitySet Name="subjects" EntityType="Self.subject" />
+    <AssociationSet Name="FK_department_faculty" Association="Self.FK_department_faculty">
+      <End Role="faculty" EntitySet="faculties" />
+      <End Role="department" EntitySet="departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LocalGovernment_state" Association="Self.FK_LocalGovernment_state">
+      <End Role="state" EntitySet="states" />
+      <End Role="LocalGovernment" EntitySet="LocalGovernments" />
+    </AssociationSet>
+    <EntitySet Name="examsittings" EntityType="myschoolModel.examsitting" />
+    <EntitySet Name="nameofexams" EntityType="myschoolModel.nameofexam" />
+    <EntitySet Name="fulldetails" EntityType="myschoolModel.fulldetail" />
+  </EntityContainer>
+  <EntityType Name="examsitting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="numberofsittings" Type="Int32" />
+  </EntityType>
+  <EntityType Name="nameofexam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="examName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="fulldetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="middleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="localGov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateofBirth" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="examSitting" Type="Int32" Nullable="false" />
+    <Property Name="exam1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sub1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sub12" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sub13" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sub14" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sub15" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="exam2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sub21" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sub22" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sub23" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sub24" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sub25" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="jambScore" Type="Int32" Nullable="false" />
+    <Property Name="jambsub1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="jambsub2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="jambsub3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="jambsub4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="faculty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="passWord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

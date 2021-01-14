@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="myschoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="ld" />
+    </Key>
+    <Property Name="ld" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adminName" Type="varchar" MaxLength="50" />
+    <Property Name="adminUser" Type="varchar" MaxLength="50" />
+    <Property Name="adminPass" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="departmentName" Type="varchar" MaxLength="50" />
+    <Property Name="facultyID" Type="int" />
+  </EntityType>
+  <EntityType Name="examsittings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="numberofsittings" Type="int" />
+  </EntityType>
+  <EntityType Name="faculty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="facultyName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="fulldetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="middleName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nationality" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="state" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="localGov" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dateofBirth" Type="date" Nullable="false" />
+    <Property Name="image" Type="image" />
+    <Property Name="examSitting" Type="int" Nullable="false" />
+    <Property Name="exam1Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sub1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sub12" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sub13" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sub14" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sub15" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="exam2Name" Type="varchar" MaxLength="50" />
+    <Property Name="sub21" Type="varchar" MaxLength="50" />
+    <Property Name="sub22" Type="varchar" MaxLength="50" />
+    <Property Name="sub23" Type="varchar" MaxLength="50" />
+    <Property Name="sub24" Type="varchar" MaxLength="50" />
+    <Property Name="sub25" Type="varchar" MaxLength="50" />
+    <Property Name="jambScore" Type="int" Nullable="false" />
+    <Property Name="jambsub1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="jambsub2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="jambsub3" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="jambsub4" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="faculty" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="department" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="passWord" Type="varchar" MaxLength="50" />
+    <Property Name="userName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="grade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="grade" Type="varchar" MaxLength="50" />
+    <Property Name="point" Type="int" />
+  </EntityType>
+  <EntityType Name="LocalGovernment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="localGov" Type="varchar" MaxLength="50" />
+    <Property Name="stateID" Type="int" />
+  </EntityType>
+  <EntityType Name="nameofexam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="examName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="state">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stateName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subjectName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_department_faculty">
+    <End Role="faculty" Type="Self.faculty" Multiplicity="0..1" />
+    <End Role="department" Type="Self.department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="faculty">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="department">
+        <PropertyRef Name="facultyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LocalGovernment_state">
+    <End Role="state" Type="Self.state" Multiplicity="0..1" />
+    <End Role="LocalGovernment" Type="Self.LocalGovernment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="state">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LocalGovernment">
+        <PropertyRef Name="stateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="myschoolModelStoreContainer">
+    <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="examsittings" EntityType="Self.examsittings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="faculty" EntityType="Self.faculty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fulldetail" EntityType="Self.fulldetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="grade" EntityType="Self.grade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocalGovernment" EntityType="Self.LocalGovernment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="nameofexam" EntityType="Self.nameofexam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="state" EntityType="Self.state" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_department_faculty" Association="Self.FK_department_faculty">
+      <End Role="faculty" EntitySet="faculty" />
+      <End Role="department" EntitySet="department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LocalGovernment_state" Association="Self.FK_LocalGovernment_state">
+      <End Role="state" EntitySet="state" />
+      <End Role="LocalGovernment" EntitySet="LocalGovernment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
