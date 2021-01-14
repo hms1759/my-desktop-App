@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="myschoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="ld" />
+          </Key>
+          <Property Name="ld" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adminName" Type="varchar" MaxLength="50" />
+          <Property Name="adminUser" Type="varchar" MaxLength="50" />
+          <Property Name="adminPass" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departmentName" Type="varchar" MaxLength="50" />
+          <Property Name="facultyID" Type="int" />
+        </EntityType>
+        <EntityType Name="examsittings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="numberofsittings" Type="int" />
+        </EntityType>
+        <EntityType Name="faculty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="facultyName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="fulldetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="middleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nationality" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="state" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="localGov" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateofBirth" Type="date" Nullable="false" />
+          <Property Name="image" Type="image" />
+          <Property Name="examSitting" Type="int" Nullable="false" />
+          <Property Name="exam1Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sub1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sub12" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sub13" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sub14" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sub15" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="exam2Name" Type="varchar" MaxLength="50" />
+          <Property Name="sub21" Type="varchar" MaxLength="50" />
+          <Property Name="sub22" Type="varchar" MaxLength="50" />
+          <Property Name="sub23" Type="varchar" MaxLength="50" />
+          <Property Name="sub24" Type="varchar" MaxLength="50" />
+          <Property Name="sub25" Type="varchar" MaxLength="50" />
+          <Property Name="jambScore" Type="int" Nullable="false" />
+          <Property Name="jambsub1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="jambsub2" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="jambsub3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="jambsub4" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="faculty" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="department" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="passWord" Type="varchar" MaxLength="50" />
+          <Property Name="userName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="50" />
+          <Property Name="point" Type="int" />
+        </EntityType>
+        <EntityType Name="LocalGovernment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="localGov" Type="varchar" MaxLength="50" />
+          <Property Name="stateID" Type="int" />
+        </EntityType>
+        <EntityType Name="nameofexam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="examName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="state">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stateName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subjectName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_department_faculty">
+          <End Role="faculty" Type="Self.faculty" Multiplicity="0..1" />
+          <End Role="department" Type="Self.department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faculty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department">
+              <PropertyRef Name="facultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalGovernment_state">
+          <End Role="state" Type="Self.state" Multiplicity="0..1" />
+          <End Role="LocalGovernment" Type="Self.LocalGovernment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocalGovernment">
+              <PropertyRef Name="stateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="myschoolModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="examsittings" EntityType="Self.examsittings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="faculty" EntityType="Self.faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fulldetail" EntityType="Self.fulldetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grade" EntityType="Self.grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocalGovernment" EntityType="Self.LocalGovernment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nameofexam" EntityType="Self.nameofexam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="state" EntityType="Self.state" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_department_faculty" Association="Self.FK_department_faculty">
+            <End Role="faculty" EntitySet="faculty" />
+            <End Role="department" EntitySet="department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalGovernment_state" Association="Self.FK_LocalGovernment_state">
+            <End Role="state" EntitySet="state" />
+            <End Role="LocalGovernment" EntitySet="LocalGovernment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="myschoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="ld" />
+          </Key>
+          <Property Name="ld" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adminUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adminPass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="facultyID" Type="Int32" />
+          <NavigationProperty Name="faculty" Relationship="Self.FK_department_faculty" FromRole="department" ToRole="faculty" />
+        </EntityType>
+        <EntityType Name="faculty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="facultyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="departments" Relationship="Self.FK_department_faculty" FromRole="faculty" ToRole="department" />
+        </EntityType>
+        <EntityType Name="grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grade1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="point" Type="Int32" />
+        </EntityType>
+        <EntityType Name="LocalGovernment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="localGov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stateID" Type="Int32" />
+          <NavigationProperty Name="state" Relationship="Self.FK_LocalGovernment_state" FromRole="LocalGovernment" ToRole="state" />
+        </EntityType>
+        <EntityType Name="state">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LocalGovernments" Relationship="Self.FK_LocalGovernment_state" FromRole="state" ToRole="LocalGovernment" />
+        </EntityType>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_department_faculty">
+          <End Role="faculty" Type="Self.faculty" Multiplicity="0..1" />
+          <End Role="department" Type="Self.department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faculty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department">
+              <PropertyRef Name="facultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalGovernment_state">
+          <End Role="state" Type="Self.state" Multiplicity="0..1" />
+          <End Role="LocalGovernment" Type="Self.LocalGovernment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocalGovernment">
+              <PropertyRef Name="stateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="myschoolEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="Self.admin" />
+          <EntitySet Name="departments" EntityType="Self.department" />
+          <EntitySet Name="faculties" EntityType="Self.faculty" />
+          <EntitySet Name="grades" EntityType="Self.grade" />
+          <EntitySet Name="LocalGovernments" EntityType="Self.LocalGovernment" />
+          <EntitySet Name="states" EntityType="Self.state" />
+          <EntitySet Name="subjects" EntityType="Self.subject" />
+          <AssociationSet Name="FK_department_faculty" Association="Self.FK_department_faculty">
+            <End Role="faculty" EntitySet="faculties" />
+            <End Role="department" EntitySet="departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalGovernment_state" Association="Self.FK_LocalGovernment_state">
+            <End Role="state" EntitySet="states" />
+            <End Role="LocalGovernment" EntitySet="LocalGovernments" />
+          </AssociationSet>
+          <EntitySet Name="examsittings" EntityType="myschoolModel.examsitting" />
+          <EntitySet Name="nameofexams" EntityType="myschoolModel.nameofexam" />
+          <EntitySet Name="fulldetails" EntityType="myschoolModel.fulldetail" />
+        </EntityContainer>
+        <EntityType Name="examsitting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="numberofsittings" Type="Int32" />
+        </EntityType>
+        <EntityType Name="nameofexam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="examName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="fulldetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="middleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="localGov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateofBirth" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="examSitting" Type="Int32" Nullable="false" />
+          <Property Name="exam1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sub1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sub12" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sub13" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sub14" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sub15" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="exam2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sub21" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sub22" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sub23" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sub24" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sub25" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="jambScore" Type="Int32" Nullable="false" />
+          <Property Name="jambsub1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jambsub2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jambsub3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jambsub4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="faculty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passWord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="myschoolModelStoreContainer" CdmEntityContainer="myschoolEntities3">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="myschoolModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="ld" ColumnName="ld" />
+                <ScalarProperty Name="adminName" ColumnName="adminName" />
+                <ScalarProperty Name="adminUser" ColumnName="adminUser" />
+                <ScalarProperty Name="adminPass" ColumnName="adminPass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="myschoolModel.department">
+              <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="departmentName" ColumnName="departmentName" />
+                <ScalarProperty Name="facultyID" ColumnName="facultyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="faculties">
+            <EntityTypeMapping TypeName="myschoolModel.faculty">
+              <MappingFragment StoreEntitySet="faculty">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grades">
+            <EntityTypeMapping TypeName="myschoolModel.grade">
+              <MappingFragment StoreEntitySet="grade">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="grade1" ColumnName="grade" />
+                <ScalarProperty Name="point" ColumnName="point" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocalGovernments">
+            <EntityTypeMapping TypeName="myschoolModel.LocalGovernment">
+              <MappingFragment StoreEntitySet="LocalGovernment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="localGov" ColumnName="localGov" />
+                <ScalarProperty Name="stateID" ColumnName="stateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="states">
+            <EntityTypeMapping TypeName="myschoolModel.state">
+              <MappingFragment StoreEntitySet="state">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="stateName" ColumnName="stateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subjects">
+            <EntityTypeMapping TypeName="myschoolModel.subject">
+              <MappingFragment StoreEntitySet="subject">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="subjectName" ColumnName="subjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="examsittings">
+            <EntityTypeMapping TypeName="myschoolModel.examsitting">
+              <MappingFragment StoreEntitySet="examsittings">
+                <ScalarProperty Name="numberofsittings" ColumnName="numberofsittings" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nameofexams">
+            <EntityTypeMapping TypeName="myschoolModel.nameofexam">
+              <MappingFragment StoreEntitySet="nameofexam">
+                <ScalarProperty Name="examName" ColumnName="examName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fulldetails">
+            <EntityTypeMapping TypeName="myschoolModel.fulldetail">
+              <MappingFragment StoreEntitySet="fulldetail">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="faculty" ColumnName="faculty" />
+                <ScalarProperty Name="jambsub4" ColumnName="jambsub4" />
+                <ScalarProperty Name="jambsub3" ColumnName="jambsub3" />
+                <ScalarProperty Name="jambsub2" ColumnName="jambsub2" />
+                <ScalarProperty Name="jambsub1" ColumnName="jambsub1" />
+                <ScalarProperty Name="jambScore" ColumnName="jambScore" />
+                <ScalarProperty Name="sub25" ColumnName="sub25" />
+                <ScalarProperty Name="sub24" ColumnName="sub24" />
+                <ScalarProperty Name="sub23" ColumnName="sub23" />
+                <ScalarProperty Name="sub22" ColumnName="sub22" />
+                <ScalarProperty Name="sub21" ColumnName="sub21" />
+                <ScalarProperty Name="exam2Name" ColumnName="exam2Name" />
+                <ScalarProperty Name="sub15" ColumnName="sub15" />
+                <ScalarProperty Name="sub14" ColumnName="sub14" />
+                <ScalarProperty Name="sub13" ColumnName="sub13" />
+                <ScalarProperty Name="sub12" ColumnName="sub12" />
+                <ScalarProperty Name="sub1" ColumnName="sub1" />
+                <ScalarProperty Name="exam1Name" ColumnName="exam1Name" />
+                <ScalarProperty Name="examSitting" ColumnName="examSitting" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="dateofBirth" ColumnName="dateofBirth" />
+                <ScalarProperty Name="localGov" ColumnName="localGov" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="nationality" ColumnName="nationality" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
